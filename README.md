@@ -18,7 +18,7 @@ cd frontend
 yarn
 
 ### run frontend
- - yarn dev
+yarn dev
 
 
 cd backend
