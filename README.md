@@ -15,7 +15,8 @@ cd frontend
 
 yarn
 
-yarn dev
+### run frontend
+ - yarn dev
 
 
 cd backend
@@ -25,5 +26,7 @@ yarn
 ## run migration
 
 yarn run:m 
+
+### run backend
 
 yarn dev
