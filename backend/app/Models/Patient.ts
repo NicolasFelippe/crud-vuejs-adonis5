@@ -12,15 +12,9 @@ export default class Patient extends BaseModel {
   public age: number
 
   @column({
-    serialize: (value?: Number) => {
+    serialize: (value: Number) => {
       return Boolean(value)
     },
   })
   public test: boolean
-
-  @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime
-
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedAt: DateTime
 }
