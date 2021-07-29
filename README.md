@@ -12,12 +12,18 @@ create database hospital;
 
 
 cd frontend
+
 yarn
+
 yarn dev
 
 
 cd backend
+
 yarn
-# run migration
+
+## run migration
+
 yarn run:m 
+
 yarn dev
