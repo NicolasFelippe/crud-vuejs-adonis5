@@ -6,7 +6,7 @@ docker run --name mysqldb -v mysqldbvol:/var/lib/mysql -p 3306:3306 -e MYSQL_ROO
 docker exec -it mysqldb mysql -uroot -p
 create database hospital;
 
-# Install packges
+# Install packages
 
 
 
