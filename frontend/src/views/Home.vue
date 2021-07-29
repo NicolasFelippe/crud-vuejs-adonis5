@@ -22,6 +22,7 @@
     </div>
     <div class="row">
       <Table
+        :data="patients"
         :columns="gridColumns"
         :filter-key="searchQuery"
         :service="serviceRequest()"
@@ -73,25 +74,32 @@ export default {
   computed: {
     ...mapGetters('patient', ['patients'])
   },
-  // async beforeMount () {
-  //   try {
-  //     const { data, meta } = await patientService.getAll()
-  //     this.pagination = meta
-  //     this.updateAll(data)
-  //   } catch (error) {
-  //     alert('Erro ao buscar pacientes')
-  //   }
-  // },
+  async mounted () {
+    try {
+      const { data } = await patientService.getAll()
+      this.updateAll(data)
+    } catch (error) {
+      alert('Erro ao buscar pacientes')
+    }
+  },
   methods: {
     ...mapActions('patient', ['updateAll', 'removePatient', 'updatePatient']),
     serviceRequest () {
       return patientService.getAll
     },
     add () {
+      this.$refs.formPatient.patient = {
+        name: '',
+        age: 0,
+        test: false
+      }
       this.$refs.formPatient.showModal()
     },
     async edit (value) {
-      this.$refs.formPatient.patient = { ...value }
+      this.$refs.formPatient.patient = {
+        ...value,
+        test: Boolean(value.test)
+      }
       this.$refs.formPatient.edit = true
       this.$refs.formPatient.showModal()
     },

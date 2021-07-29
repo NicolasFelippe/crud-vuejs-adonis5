@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import Pagination from './Pagination'
 export default {
   name: 'Table',
@@ -67,14 +68,10 @@ export default {
     }
   },
   props: {
-    // data: {
-    //   type: Array,
-    //   required: true
-    // },
-    // pagination: {
-    //   type: Object,
-    //   required: true
-    // },
+    data: {
+      type: Array,
+      required: true
+    },
     columns: {
       type: Array,
       required: true
@@ -96,11 +93,11 @@ export default {
     return {
       sortKey: '',
       sortOrders,
-      data: [],
       pagination: {}
     }
   },
   computed: {
+    ...mapGetters('patient', ['patients']),
     filteredData () {
       const sortKey = this.sortKey
       const filterKey = this.filterKey && this.filterKey.toLowerCase()
@@ -123,21 +120,17 @@ export default {
       return data
     }
   },
-  async beforeMount () {
-    this.fetchData()
+  beforeMount () {
+    this.fetchPagination()
   },
   methods: {
-    fetchPagination (value) {
-      this.fetchData(value)
-    },
-    async fetchData (value = '') {
+    ...mapActions('patient', ['updateAll']),
+    async fetchPagination (value) {
       try {
-        const { data, meta } = await this.service(value)
+        const { meta } = await this.service(value)
         this.pagination = meta
-        // this.updateAll(data)
-        this.data = data
       } catch (error) {
-        alert('Erro ao buscar pacientes')
+        alert('Erro ao buscar paginação')
       }
     },
     getCell (entry, key) {

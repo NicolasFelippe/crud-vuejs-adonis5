@@ -40,6 +40,7 @@
           name-input="test"
           @invalid="(val) => invalidForm=val"
         />
+        {{ patient }}
       </form>
     </template>
     <template v-slot:footer>
